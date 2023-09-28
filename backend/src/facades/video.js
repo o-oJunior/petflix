@@ -5,10 +5,10 @@ class VideoFacade {
 
   videos() {
     this.linkVideos = [
-      { link: 'https://www.youtube.com/embed/VXzPicGH5sU?si=MFF5hJOLxxR6-wfW' },
-      { link: 'https://www.youtube.com/embed/cvbWvtSsAC0?si=UzHxScztWWp0OL8w' },
-      { link: 'https://www.youtube.com/embed/gDHHuL3mv-U?si=gLiLOafebpzJCaXa' },
-      { link: 'https://www.youtube.com/embed/X0u9iezWJOo?si=OOPFcUnBJv1ulQFo' },
+      { link: 'https://www.youtube.com/embed/VXzPicGH5sU?autoplay=1&mute=1' },
+      { link: 'https://www.youtube.com/embed/cvbWvtSsAC0?autoplay=1&mute=1' },
+      { link: 'https://www.youtube.com/embed/gDHHuL3mv-U?autoplay=1&mute=1' },
+      { link: 'https://www.youtube.com/embed/X0u9iezWJOo?autoplay=1&mute=1' },
     ];
     return this.linkVideos;
   }
