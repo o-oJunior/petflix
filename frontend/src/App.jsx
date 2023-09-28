@@ -29,8 +29,6 @@ function App() {
     } else {
       setIndex(index + 1);
     }
-
-    getAllVideos();
   };
 
   const backVideo = () => {
@@ -39,14 +37,12 @@ function App() {
     } else {
       setIndex(index - 1);
     }
-
-    getAllVideos();
   };
 
   const handleKeydown = (event) => {
-    if (event.key === 'ArrowRight' && index < videos.length - 1) {
+    if (event.key === 'ArrowRight') {
       nextVideo();
-    } else if (event.key === 'ArrowLeft' && index > 0) {
+    } else if (event.key === 'ArrowLeft') {
       backVideo();
     }
   };
@@ -68,13 +64,13 @@ function App() {
       <div className="buttons">
         {index > 0 && (
           <button onClick={backVideo} className="back">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-left"></i>
           </button>
         )}
 
         {index < videos.length - 1 && (
           <button onClick={nextVideo} className="go">
-            <i class="fa-solid fa-arrow-right"></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </button>
         )}
       </div>
