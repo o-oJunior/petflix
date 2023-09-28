@@ -67,14 +67,14 @@ function App() {
 
       <div className="buttons">
         {index > 0 && (
-          <button id="btnBack" onClick={backVideo} className="back">
-            Back
+          <button onClick={backVideo} className="back">
+            <i class="fa-solid fa-arrow-left"></i>
           </button>
         )}
 
         {index < videos.length - 1 && (
-          <button id="btnNext" onClick={nextVideo} className="go">
-            Go
+          <button onClick={nextVideo} className="go">
+            <i class="fa-solid fa-arrow-right"></i>
           </button>
         )}
       </div>
