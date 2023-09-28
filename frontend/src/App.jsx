@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const index = useRef(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     getAllVideos();
-  }, []);
+    window.removeEventListener('keydown', handleKeydown);
+  }, [index]);
 
   const getAllVideos = () => {
     fetch('http://localhost:3030/api/videos')
@@ -19,47 +20,44 @@ function App() {
   };
 
   const showVideo = () => {
-    const btnNext = document.getElementById('btnNext');
-    if (index.current >= videos.length - 1) {
-      btnNext.style.visibility = 'hidden';
-    } else {
-      btnNext.style.visibility = 'visible';
-    }
-
-    const btnBack = document.getElementById('btnBack');
-    if (index.current <= 0) {
-      btnBack.style.visibility = 'hidden';
-    } else {
-      btnBack.style.visibility = 'visible';
-    }
-
-    return videos[index.current].link;
+    return videos[index].link;
   };
 
   const nextVideo = () => {
-    if (index.current >= videos.length - 1) {
-      index.current = videos.length - 1;
+    if (index >= videos.length - 1) {
+      setIndex(videos.length - 1);
     } else {
-      index.current = index.current + 1;
+      setIndex(index + 1);
     }
 
     getAllVideos();
   };
 
   const backVideo = () => {
-    if (index.current <= 0) {
-      index.current = 0;
+    if (index <= 0) {
+      setIndex(0);
     } else {
-      index.current = index.current - 1;
+      setIndex(index - 1);
     }
 
     getAllVideos();
   };
 
+  const handleKeydown = (event) => {
+    if (event.key === 'ArrowRight' && index < videos.length - 1) {
+      nextVideo();
+    } else if (event.key === 'ArrowLeft' && index > 0) {
+      backVideo();
+    }
+  };
+
+  window.addEventListener('keydown', handleKeydown);
+
   return (
     <div>
       <div className="view">
         <iframe
+          id="video"
           width="100%"
           height="100%"
           src={videos.length > 0 ? showVideo() : console.log('Carregando video...')}
@@ -68,17 +66,17 @@ function App() {
       </div>
 
       <div className="buttons">
-        <div id="btnBack">
-          <button onClick={backVideo} className="back">
+        {index > 0 && (
+          <button id="btnBack" onClick={backVideo} className="back">
             Back
           </button>
-        </div>
+        )}
 
-        <div id="btnNext">
-          <button onClick={nextVideo} className="go">
+        {index < videos.length - 1 && (
+          <button id="btnNext" onClick={nextVideo} className="go">
             Go
           </button>
-        </div>
+        )}
       </div>
     </div>
   );
